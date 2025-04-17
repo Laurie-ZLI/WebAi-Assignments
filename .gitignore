@@ -1,0 +1,25 @@
+# macOS 系统生成的隐藏文件
+.DS_Store
+
+# VS Code 编辑器的配置文件（个人偏好）
+.vscode/
+
+# Node.js 项目缓存（虽然你现在没用到，但将来可能会用）
+node_modules/
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.swp
+
+# 系统回收站等
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# 其他
+.env
+*.local
