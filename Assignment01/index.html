@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registeration From</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <header><h1>Sign Up</h1></header>
+      <!-- 表单容器开始 -->
+      <form action="">
+        <!-- 基本信息部分 -->
+        <fieldset class="form-section fieldset-basic">
+          <legend>Your Basic info</legend>
+
+          <label for="first-name">First Name</label>
+          <input
+            type="text"
+            name="first-name"
+            id="first-name"
+            required
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          />
+
+          <label for="last-name">Last Name</label>
+          <input
+            type="text"
+            name="last-name"
+            id="last-name"
+            required
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          />
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          />
+
+          <label for="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            required
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          />
+
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            minlength="8"
+            pattern="[A-Za-z0-9!@#$%^&*()_+=\-.,?]+"
+          />
+          <!-- 密码提示说明 -->
+          <small class="input-hint"
+            >* Password must be at least 8 characters.</small
+          >
+
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            name="confirm-password"
+            id="confirm-password"
+            required
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          />
+        </fieldset>
+
+        <!-- 其他信息部分 -->
+        <fieldset class="form-section fieldset-other">
+          <legend>Other details</legend>
+
+          <label for="birth-date">Birth Date:</label>
+          <input
+            type="date"
+            id="birth-date"
+            name="birth-date"
+            required
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          />
+
+          <p class="section-label">Gender:</p>
+          <div class="gender-group">
+            <label for="male">Male</label>
+            <input type="radio" id="male" name="gender" value="male" />
+            <label for="female">Female</label>
+            <input type="radio" id="female" name="gender" value="female" />
+            <label for="other">Other</label>
+            <input type="radio" id="other" name="gender" value="other" />
+          </div>
+
+          <label for="about-me" class="label-about">About Me</label>
+          <textarea
+            name="about-me"
+            id="about-me"
+            class="textarea-about"
+            pattern="[A-Za-z0-9\s.,!?@#$%^&*()_+=\-]*"
+          ></textarea>
+
+          <label for="choose-your-profession">Choose Your Profession</label>
+          <select id="profession" name="profession">
+            <option value="web-dev">Web Development</option>
+            <option value="data-analytics">Data Analytics</option>
+            <option value="ui-ux">UI/UX Design</option>
+          </select>
+        </fieldset>
+
+        <!-- 接受条款 -->
+        <label for="terms">
+          <input type="checkbox" id="terms" name="terms" required />
+          I'm accepting Terms and Conditions
+        </label>
+
+        <!-- 提交按钮 -->
+        <button type="submit">Sign Up</button>
+
+        <!-- 页脚说明 -->
+        <footer>2017-2025 JR Academy Pty Ltd. All rights reserved.</footer>
+      </form>
+      <!-- 表单容器结束 -->
+    </div>
+  <script>
+    const form = document.querySelector("form");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
+  
+    // 添加密码强度提示元素
+    const strengthHint = document.createElement("small");
+    strengthHint.className = "input-hint";
+    password.insertAdjacentElement("afterend", strengthHint);
+  
+    // 检查密码强度
+    password.addEventListener("input", () => {
+      const value = password.value;
+      let strength = "";
+      let color = "";
+      if (value.length < 8) {
+        strength = "Too short";
+        color = "#e74c3c";
+      } else if (/^[a-zA-Z0-9]*$/.test(value)) {
+        strength = "Weak";
+        color = "#e67e22";
+      } else if (/[!@#$%^&*]/.test(value)) {
+        strength = "Medium";
+        color = "#f1c40f";
+      }
+      if (value.length >= 12 && /[A-Z]/.test(value) && /\d/.test(value) && /[!@#$%^&*]/.test(value)) {
+        strength = "Strong";
+        color = "#2ecc71";
+      }
+      strengthHint.textContent = `Password strength: ${strength}`;
+      strengthHint.style.color = color;
+    });
+  
+    // 表单提交验证密码一致性
+    form.addEventListener("submit", (e) => {
+      if (password.value !== confirmPassword.value) {
+        e.preventDefault();
+        confirmPassword.style.borderColor = "#e74c3c";
+        confirmPassword.setCustomValidity("Passwords do not match.");
+      } else {
+        confirmPassword.setCustomValidity("");
+      }
+  
+      form.classList.add("was-validated");
+    });
+  </script>
+  </body>
+</html>
